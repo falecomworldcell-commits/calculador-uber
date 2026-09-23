@@ -6,16 +6,16 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Pegar os arquivos do projeto
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Ligar o Java do Android
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Configurar o Python Estável
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -24,13 +24,13 @@ jobs:
           pip install --upgrade pip
           pip install buildozer cython Kivy==2.3.0
 
-      - name: Criar a Certidão e Mudar as Permissões do App
+      - name: Criar a Certidão Leve do App
         run: |
           buildozer init
           sed -i 's/title = .+/title = Calculador Uber/g' buildozer.spec
           sed -i 's/package.name = .+/package.name = calculadoruber/g' buildozer.spec
-          sed -i 's/requirements = .+/requirements = python3==3.11.9,kivy==2.3.0,easyocr,requests,setuptools/g' buildozer.spec
-          sed -i 's/#android.permissions = .+/android.permissions = INTERNET,SYSTEM_ALERT_WINDOW/g' buildozer.spec
+          sed -i 's/requirements = .+/requirements = python3,kivy==2.3.0,requests,setuptools/g' buildozer.spec
+          sed -i 's/#android.permissions = .+/android.permissions = INTERNET/g' buildozer.spec
 
       - name: Costurar e Fechar o Pacote .APK
         run: |
