@@ -38,7 +38,7 @@ jobs:
           yes | buildozer -v android debug
 
       - name: Entregar o Arquivo Pronto para Download
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Aplicativo_Calculador_Uber
           path: bin/*.apk
