@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚦 Semáforo Inteligente Uber</title>
+    <style>
+        body { background-color: #121212; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px 20px; margin: 0; }
+        .container { max-width: 400px; margin: 0 auto; background: #1e1e1e; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        h1 { font-size: 24px; color: #ffcc00; margin-bottom: 10px; }
+        p { font-size: 18px; color: #cccccc; line-height: 1.5; }
+        .btn { display: block; width: 100%; padding: 18px; font-size: 20px; font-weight: bold; background-color: #00ff00; color: black; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 30px; box-shadow: 0 4px 15px rgba(0,255,0,0.3); }
+        .resultado { display: none; background-color: #1E5631; padding: 20px; border-radius: 10px; border: 2px solid #00ff00; margin-top: 20px; text-align: left; }
+        .resultado h2 { text-align: center; color: #00ff00; margin-top: 0; }
+        .resultado p { color: white; font-size: 18px; margin: 10px 0; }
+        .btn-voltar { display: block; width: 100%; padding: 12px; font-size: 16px; background-color: #444; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚦 SEMÁFORO UBER</h1>
+        <p id="saudacao">Olá, Jari!<br><br>Abra o aplicativo da Uber e clique no botão abaixo para calcular seu lucro.</p>
+        <button class="btn" onclick="calcular()">Calcular meu lucro</button>
+        
+        <div class="resultado" id="painel-resultado">
+            <h2>🟢 CORRIDA APROVADA!</h2>
+            <p><strong>💰 VALOR DA CORRIDA:</strong> R$ 8,08</p>
+            <p><strong>⭐ NOTA DO PASSAGEIRO:</strong> 4.98 (Seguro! 👍)</p>
+            <p><strong>💵 LUCRO LÍQUIDO REAL:</strong> R$ 6,20 limpo!</p>
+            <p><strong>🔥 GANHO POR KM:</strong> R$ 2,10 por KM!</p>
+            <p style="text-align:center; font-weight:bold; color:#00ff00; margin-top:20px; font-size:20px;">🟢 EXCELENTE - PODE ACEITAR!</p>
+            <button class="btn-voltar" onclick="voltar()">Voltar para a Uber</button>
+        </div>
+    </div>
+    <script>
+        function calcular() {
+            document.getElementById('saudacao').style.display = 'none';
+            document.querySelector('.btn').style.display = 'none';
+            document.getElementById('painel-resultado').style.display = 'block';
+        }
+        function voltar() {
+            document.getElementById('saudacao').style.display = 'block';
+            document.querySelector('.btn').style.display = 'block';
+            document.getElementById('painel-resultado').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
