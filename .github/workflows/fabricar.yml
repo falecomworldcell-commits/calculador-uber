@@ -1,0 +1,44 @@
+name: Fabricar Aplicativo Uber
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Pegar os arquivos do projeto
+        uses: actions/checkout@v3
+
+      - name: Ligar o Java do Android
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Configurar o Python Estável
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar o Fabricador de Apps
+        run: |
+          pip install --upgrade pip
+          pip install buildozer cython Kivy==2.3.0
+
+      - name: Criar a Certidão e Mudar as Permissões do App
+        run: |
+          buildozer init
+          sed -i 's/title = .+/title = Calculador Uber/g' buildozer.spec
+          sed -i 's/package.name = .+/package.name = calculadoruber/g' buildozer.spec
+          sed -i 's/requirements = .+/requirements = python3==3.11.9,kivy==2.3.0,easyocr,requests,setuptools/g' buildozer.spec
+          sed -i 's/#android.permissions = .+/android.permissions = INTERNET,SYSTEM_ALERT_WINDOW/g' buildozer.spec
+
+      - name: Costurar e Fechar o Pacote .APK
+        run: |
+          export BUILDOZER_ALLOW_KIVY_NEW_DESIGN=1
+          yes | buildozer -v android debug
+
+      - name: Entregar o Arquivo Pronto para Download
+        uses: actions/upload-artifact@v3
+        with:
+          name: Aplicativo_Calculador_Uber
+          path: bin/*.apk
